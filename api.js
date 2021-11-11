@@ -24,15 +24,19 @@ async function displayResults(json) {
     let newSpeciesListing = document.getElementById("newSpecies")
     newSpeciesListing.innerHTML=speciesName
 
-    let pokedexNumber = json.pokedex_numbers[0].entry_number;
-    let newPokedexNumber = document.getElementById("newPokedex")
-    newPokedexNumber.innerHTML=pokedexNumber
+    // let pokedexNumber = json.pokedex_numbers[0].entry_number;
+    // let newPokedexNumber = document.getElementById("newPokedex")
+    // newPokedexNumber.innerHTML=pokedexNumber
+
+    let mythicalStatus = json.is_mythical;
+    let newMythicalStatus = document.getElementById("newMythicalStatus")
+    newMythicalStatus.innerHTML=mythicalStatus
 
     let legendaryStatus = json.is_legendary;
     let newLegendaryStatus = document.getElementById("newLegendaryStatus")
     newLegendaryStatus.innerHTML=legendaryStatus
 
-    if(json.evolves_from_species !== null) {
+    if(json.evolves_from_species !== null, undefined) {
         let evolvesFrom = json.evolves_from_species.name;
         let newEvolvesFrom = document.getElementById("newEvolvesFrom");
         newEvolvesFrom.innerHTML=evolvesFrom;

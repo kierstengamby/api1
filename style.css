@@ -1,0 +1,76 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/538px-International_Pok%C3%A9mon_logo.svg.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center top;
+    background-color: #ffcb05;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    color: #003a70;
+    padding: 12% 0 0 0;
+}
+
+h4 {
+    display: flex;
+    justify-content: center;
+    padding: 0 0 1% 0;
+}
+
+form {
+    background-color: #3d7dca;
+    display: flex;
+    justify-content: center;
+    border-radius: 1em;
+}
+
+.formOutputs {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 25px 0 0 0;
+}
+
+#speciesNames {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#mythical {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#legendaryStatus {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#evolvesFrom {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#habitat {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#generation {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+p {
+    padding: 0 4px 0 4px;
+}
