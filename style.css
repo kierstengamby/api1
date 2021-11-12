@@ -71,6 +71,12 @@ form {
     flex-wrap: wrap;
 }
 
+#evolvesTo {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 p {
     padding: 0 4px 0 4px;
 }

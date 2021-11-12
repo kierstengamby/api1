@@ -12,11 +12,11 @@ async function fetchResults () {
     let parsedPokemonData = await pokemonBaseData.json();
     displayResults(parsedPokemonData);
 
-    // let evolutionData = await fetch(parsedPokemonData.evolution_chain.url);
-    // let parsedEvolutionData = await evolutionData.json();
-    // displayEvolutionResults(parsedEvolutionData);
+    let evolutionData = await fetch(parsedPokemonData.evolution_chain.url);
+    let parsedEvolutionData = await evolutionData.json();
+    displayEvolutionResults(parsedEvolutionData);
 
-    // console.log(parsedEvolutionData);
+    console.log(parsedEvolutionData);
 }
 
 async function displayResults(json) {
@@ -36,12 +36,6 @@ async function displayResults(json) {
     let newLegendaryStatus = document.getElementById("newLegendaryStatus")
     newLegendaryStatus.innerHTML=legendaryStatus
 
-    if(json.evolves_from_species !== null, undefined) {
-        let evolvesFrom = json.evolves_from_species.name;
-        let newEvolvesFrom = document.getElementById("newEvolvesFrom");
-        newEvolvesFrom.innerHTML=evolvesFrom;
-    };
-
     let habitat = json.habitat.name;
     let newHabitat = document.getElementById("newHabitat")
     newHabitat.innerHTML=habitat
@@ -49,15 +43,21 @@ async function displayResults(json) {
     let generation = json.generation.name;
     let newGeneration = document.getElementById("newGeneration")
     newGeneration.innerHTML=generation
+
+    if(json.evolves_from_species !== null || undefined) {
+        let evolvesFrom = json.evolves_from_species.name;
+        let newEvolvesFrom = document.getElementById("newEvolvesFrom");
+        newEvolvesFrom.innerHTML=evolvesFrom;
+    };
 };
 
-// async function displayEvolutionResults(json2) {
-//     if(json2.chain.evolves_to[0].species.name !== null) {
-//         let evolvesTo = json2.chain.evolves_to[0]?.evolves_to[0]?.evolves_to[0]?.species?.name;
-//         if(evolvesTo == undefined) {
-//             evolvesTo = json2.chain.evolves_to[0].species.name
-//         };
-//         let newEvolvesTo = document.getElementById("newEvolvesTo");
-//         newEvolvesTo.innerHTML=evolvesTo;
-//     };
-// };
+async function displayEvolutionResults(json2) {
+    if(json2.chain.evolves_to[0].species.name !== null || undefined) {
+        let evolvesTo = json2.chain.evolves_to[0].evolves_to[0].species.name;
+        if(evolvesTo == null || undefined) {
+            evolvesTo = json2.chain.evolves_to[0].species.name
+        };
+        let newEvolvesTo = document.getElementById("newEvolvesTo");
+        newEvolvesTo.innerHTML=evolvesTo;
+    };
+};
