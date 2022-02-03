@@ -1,16 +1,18 @@
-
 const baseURL = 'https://pokeapi.co/api/v2/pokemon-species/'
 let url;
-// let url2;
 
-const submitBtn = document.querySelector('.enter')
-submitBtn.addEventListener('click', fetchResults)
-let number = document.getElementById("numberSelector").value
 
 async function fetchResults () {
-    let pokemonBaseData = await fetch(`${baseURL}${number}`)
+    let number = document.getElementById("numberSelector").value
+    document.getElementById("numberSelector").defaultValue = 0;
+
+    url = (`${baseURL}${number}`);
+
+    let pokemonBaseData = await fetch(url)
     let parsedPokemonData = await pokemonBaseData.json();
     displayResults(parsedPokemonData);
+
+    console.log(parsedPokemonData);
 
     let evolutionData = await fetch(parsedPokemonData.evolution_chain.url);
     let parsedEvolutionData = await evolutionData.json();
@@ -19,14 +21,10 @@ async function fetchResults () {
     console.log(parsedEvolutionData);
 }
 
-async function displayResults(json) {
+function displayResults(json) {
     let speciesName = json.name;
     let newSpeciesListing = document.getElementById("newSpecies")
     newSpeciesListing.innerHTML=speciesName
-
-    // let pokedexNumber = json.pokedex_numbers[0].entry_number;
-    // let newPokedexNumber = document.getElementById("newPokedex")
-    // newPokedexNumber.innerHTML=pokedexNumber
 
     let mythicalStatus = json.is_mythical;
     let newMythicalStatus = document.getElementById("newMythicalStatus")
@@ -48,16 +46,25 @@ async function displayResults(json) {
         let evolvesFrom = json.evolves_from_species.name;
         let newEvolvesFrom = document.getElementById("newEvolvesFrom");
         newEvolvesFrom.innerHTML=evolvesFrom;
+    } else if(json.evolves_from_species == null || undefined){
+        newEvolvesFrom.innerHTML=" "
     };
 };
 
-async function displayEvolutionResults(json2) {
+function displayEvolutionResults(json2) {
     if(json2.chain.evolves_to[0].species.name !== null || undefined) {
-        let evolvesTo = json2.chain.evolves_to[0].evolves_to[0].species.name;
+        let evolvesTo = json2.chain.evolves_to[0].evolves_to[0];
         if(evolvesTo == null || undefined) {
             evolvesTo = json2.chain.evolves_to[0].species.name
+        } else if (evolvesTo !== null || undefined) {
+            evolvesTo = json2.chain.evolves_to[0].evolves_to[0].species.name;
         };
         let newEvolvesTo = document.getElementById("newEvolvesTo");
         newEvolvesTo.innerHTML=evolvesTo;
+    } else {
+        document.getElementById("newEvolvesTo").innerHTML=" "
     };
 };
+
+const submitBtn = document.querySelector('.enter')
+submitBtn.addEventListener('click', fetchResults)
